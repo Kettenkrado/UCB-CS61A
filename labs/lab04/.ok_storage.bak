@@ -1,0 +1,5 @@
+'divide-correct', (0, 70)
+'buy-correct', (512, 70)
+'distance-correct', (1024, 70)
+'closer_city-correct', (1536, 70)
+'check_city_abstraction-correct', (2048, 70)
