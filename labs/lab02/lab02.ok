@@ -1,6 +1,6 @@
 {
     "name": "Lab 2",
-    "endpoint": "cal/cs61a/sp23/lab02",
+    "endpoint": "ucb/cs61a/sp24/lab02",
     "src": [
         "lab02.py"
     ],
@@ -10,7 +10,7 @@
     },
     "default_tests": [
         "lambda",
-        "short-circuit-no-chaining",
+        "short-circuit",
         "hof-wwpd",
         "count_cond",
         "composite_identity"

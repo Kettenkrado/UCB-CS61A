@@ -10,11 +10,40 @@ def falling(n, k):
     >>> falling(4, 0)
     1
     """
-    if k == 0: 
-        return 1
-    else:
-        return falling(n-1, k-1) * n
+    total, stop = 1, n-k
+    while n > stop:
+        total, n = total*n, n-1
+    return total
 
+
+def divisible_by_k(n, k):
+    """
+    >>> a = divisible_by_k(10, 2)  # 2, 4, 6, 8, and 10 are divisible by 2
+    2
+    4
+    6
+    8
+    10
+    >>> a
+    5
+    >>> b = divisible_by_k(3, 1)  # 1, 2, and 3 are divisible by 1
+    1
+    2
+    3
+    >>> b
+    3
+    >>> c = divisible_by_k(6, 7)  # There are no integers up to 6 divisible by 7
+    >>> c
+    0
+    """
+    count = 0
+    i = 1
+    while i <= n:
+        if i % k == 0:
+            print(i)
+            count += 1
+        i += 1
+    return count
 
 
 def sum_digits(y):
@@ -30,11 +59,10 @@ def sum_digits(y):
     >>> a
     6
     """
-    if y // 10 == 0: 
-        return y
-    else:
-        return y % 10 + sum_digits(y // 10)
-
+    total = 0
+    while y > 0:
+        total, y = total + y % 10, y // 10
+    return total
 
 
 def double_eights(n):
@@ -52,14 +80,15 @@ def double_eights(n):
     >>> double_eights(80808080)
     False
     """
-    if n // 100 == 0:
-        if n == 88:
+    prev_eight = False
+    while n > 0:
+        last_digit = n % 10
+        if last_digit == 8 and prev_eight:
             return True
+        elif last_digit == 8:
+            prev_eight = True
         else:
-            return False
-    if n % 10 == 8 and n // 10 % 10 == 8:
-        return True
-    else:
-        return double_eights(n // 10)
-
+            prev_eight = False
+        n = n // 10
+    return False
 

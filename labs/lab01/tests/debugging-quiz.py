@@ -5,14 +5,15 @@ test = {
     {
       'cases': [
         {
-          'answer': 'h(x + y * 5)',
+          'answer': '04c227bc171e79bdf2f704618b690d63',
           'choices': [
             'f("hi")',
             'g(x + x, x)',
             'h(x + y * 5)'
           ],
           'hidden': False,
-          'locked': False,
+          'locked': True,
+          'multiline': False,
           'question': r"""
           In the following traceback, what is the most recent function call?
           Traceback (most recent call last):
@@ -28,14 +29,15 @@ test = {
           """
         },
         {
-          'answer': 'the code attempted to add a string to an integer',
+          'answer': 'e415098d79d97b14a9c3ed4bb799941c',
           'choices': [
             'the code attempted to add a string to an integer',
             'the code looped infinitely',
             'there was a missing return statement'
           ],
           'hidden': False,
-          'locked': False,
+          'locked': True,
+          'multiline': False,
           'question': r"""
           In the following traceback, what is the cause of this error?
           Traceback (most recent call last):
@@ -51,7 +53,7 @@ test = {
           """
         },
         {
-          'answer': "def square(x): ''' >>> square(2) 4 ''' return x * x",
+          'answer': '379a2d693f94542100c79dcbef881bf2',
           'choices': [
             r"""
             def square(x):
@@ -86,33 +88,36 @@ test = {
             """
           ],
           'hidden': False,
-          'locked': False,
+          'locked': True,
+          'multiline': False,
           'question': 'How do you write a doctest asserting that square(2) == 4?'
         },
         {
-          'answer': 'To investigate the values of variables at certain points in your code',
+          'answer': 'f48da7442af11bddcb273308a88a9970',
           'choices': [
             'For permanant debugging so you can have long term confidence in your code',
             'To ensure that certain conditions are true at certain points in your code',
             'To investigate the values of variables at certain points in your code'
           ],
           'hidden': False,
-          'locked': False,
+          'locked': True,
+          'multiline': False,
           'question': 'When should you use print statements?'
         },
         {
-          'answer': "Print with 'DEBUG:' at the front of the outputted line",
+          'answer': '57309603fab64e9deef8aab56ab89f9b',
           'choices': [
             "You don't need to do anything, ok only looks at returned values, not printed values",
             "Print with 'DEBUG:' at the front of the outputted line",
             'Print with # at the front of the outputted line'
           ],
           'hidden': False,
-          'locked': False,
+          'locked': True,
+          'multiline': False,
           'question': 'How do you prevent the ok autograder from interpreting print statements as output?'
         },
         {
-          'answer': 'python3 ok -q sum_digits -i',
+          'answer': '8a0e59465cbd3db201c83bad39a38190',
           'choices': [
             'python3 ok -q sum_digits -i',
             'python3 ok -q sum_digits --trace',
@@ -120,23 +125,12 @@ test = {
             'python3 -i lab01.py'
           ],
           'hidden': False,
-          'locked': False,
+          'locked': True,
+          'multiline': False,
           'question': 'What is the best way to open an interactive terminal to investigate a failing test for question sum_digits in assignment lab01?'
         },
         {
-          'answer': 'python3 ok -q sum_digits --trace',
-          'choices': [
-            'python3 ok -q sum_digits -i',
-            'python3 ok -q sum_digits --trace',
-            'python3 ok -q sum_digits',
-            'python3 -i lab01.py'
-          ],
-          'hidden': False,
-          'locked': False,
-          'question': 'What is the best way to look at an environment diagram to investigate a failing test for question sum_digits in assignment lab01?'
-        },
-        {
-          'answer': 'Code that returns a wrong answer instead of crashing is generally better as it at least works fine',
+          'answer': '5c1e38494cf0399527b69ad7bd7037f2',
           'choices': [
             'Code that returns a wrong answer instead of crashing is generally better as it at least works fine',
             'Testing is very important to ensure robust code',
@@ -145,56 +139,9 @@ test = {
             'It is generally good practice to release code with assertion statements left in'
           ],
           'hidden': False,
-          'locked': False,
+          'locked': True,
+          'multiline': False,
           'question': 'Which of the following is NOT true?'
-        },
-        {
-          'answer': 'You had an unmatched parenthesis',
-          'choices': [
-            'You had an unmatched parenthesis',
-            'Your indentation mixed tabs and spaces',
-            'You forgot a return statement',
-            'You typed a variable name incorrectly'
-          ],
-          'hidden': False,
-          'locked': False,
-          'question': 'You get a SyntaxError. What is most likely to have happened?'
-        },
-        {
-          'answer': 'Your indentation mixed tabs and spaces',
-          'choices': [
-            'You had an unmatched parenthesis',
-            'Your indentation mixed tabs and spaces',
-            'You forgot a return statement',
-            'You typed a variable name incorrectly'
-          ],
-          'hidden': False,
-          'locked': False,
-          'question': 'You get a IndentationError. What is most likely to have happened?'
-        },
-        {
-          'answer': 'You forgot a return statement',
-          'choices': [
-            'You had an unmatched parenthesis',
-            'Your indentation mixed tabs and spaces',
-            'You forgot a return statement',
-            'You typed a variable name incorrectly'
-          ],
-          'hidden': False,
-          'locked': False,
-          'question': "You get a TypeError: ... 'NoneType' object is not ... . What is most likely to have happened?"
-        },
-        {
-          'answer': 'You typed a variable name incorrectly',
-          'choices': [
-            'You had an unmatched parenthesis',
-            'Your indentation mixed tabs and spaces',
-            'You forgot a return statement',
-            'You typed a variable name incorrectly'
-          ],
-          'hidden': False,
-          'locked': False,
-          'question': 'You get a NameError. What is most likely to have happened?'
         }
       ],
       'scored': False,

@@ -23,7 +23,8 @@ test = {
           25
           """,
           'hidden': False,
-          'locked': False
+          'locked': False,
+          'multiline': False
         },
         {
           'code': r"""
@@ -32,21 +33,29 @@ test = {
           ...         print('huge')
           ...     elif x > 5:
           ...         return 'big'
-          ...     elif x > 0:
-          ...         print('small')
+          ...     if x > 0:
+          ...         print('positive')
           ...     else:
-          ...         print("nothin")
-          >>> how_big(7)
+          ...         print(0)
+          >>> how_big(7)  # Be careful with quotation marks!
           'big'
+          >>> print(how_big(7))  # Be careful with quotation marks!
+          big
           >>> how_big(12)
           huge
-          >>> how_big(1)
-          small
-          >>> how_big(-1)
-          nothin
+          positive
+          >>> print(how_big(12))
+          huge
+          positive
+          None
+          >>> print(how_big(1), how_big(0))
+          positive
+          0
+          None None
           """,
           'hidden': False,
-          'locked': False
+          'locked': False,
+          'multiline': False
         }
       ],
       'scored': False,
@@ -66,34 +75,23 @@ test = {
           -1
           """,
           'hidden': False,
-          'locked': False
+          'locked': False,
+          'multiline': True
         },
         {
           'code': r"""
-          >>> positive = 28
-          >>> while positive: # If this loops forever, just type Infinite Loop
-          ...    print("positive?")
-          ...    positive -= 3
-          Infinite Loop
-          """,
-          'hidden': False,
-          'locked': False
-        },
-        {
-          'code': r"""
-          >>> positive = -9
           >>> negative = -12
           >>> while negative: # If this loops forever, just type Infinite Loop
-          ...    if positive:
+          ...    if negative + 6:
           ...        print(negative)
-          ...    positive += 3
           ...    negative += 3
           -12
           -9
-          -6
+          -3
           """,
           'hidden': False,
-          'locked': False
+          'locked': False,
+          'multiline': True
         }
       ],
       'scored': False,
