@@ -117,11 +117,11 @@ class Server:
 
     def send(self, email):
         """Append the email to the inbox of the client it is addressed to."""
-        ____.inbox.append(email)
+        self.clients[email.recipient_name].inbox.append(email)
 
     def register_client(self, client):
         """Add a client to the dictionary of clients."""
-        ____[____] = ____
+        self.clients[client.name] = client
 
 class Client:
     """A client has a server, a name (str), and an inbox (list).
@@ -144,11 +144,11 @@ class Client:
         self.inbox = []
         self.server = server
         self.name = name
-        server.register_client(____)
+        server.register_client(self)
 
     def compose(self, message, recipient_name):
         """Send an email with the given message to the recipient."""
-        email = Email(message, ____, ____)
+        email = Email(message, self, recipient_name)
         self.server.send(email)
 
 
@@ -185,7 +185,28 @@ def make_change(amount, coins):
     rest = remove_one(coins, smallest)
     if amount < smallest:
         return None
-    "*** YOUR CODE HERE ***"
+    elif amount == smallest:
+        return [smallest]
+    else:
+        with_smallest = make_change(amount - smallest, rest)
+        remove_all_smallest = rest
+        while smallest in remove_all_smallest:
+            # no need to delete them all at once, just skip one by one
+            remove_all_smallest = remove_one(remove_all_smallest, smallest)
+        without_smallest = make_change(amount, remove_all_smallest)
+        if with_smallest:
+            return [smallest] + with_smallest
+        elif without_smallest:
+            return without_smallest
+        
+        """
+        else:
+        result = make_change(amount-smallest, rest)
+        if result:
+            return [smallest] + result
+        else:
+            return make_change(amount, rest)
+        """
 
 def remove_one(coins, coin):
     """Remove one coin from a dictionary of coins. Return a new dictionary,
@@ -280,5 +301,32 @@ class ChangeMachine:
 
     def change(self, coin):
         """Return change for coin, removing the result from self.coins."""
-        "*** YOUR CODE HERE ***"
+        output = make_change(coin, self.coins)
 
+        if output:
+        # 但是还是不太好，如果先把硬币加进去就不用判断是不是为空了
+        # self.coins[coin] = 1 + self.coins.get(coin, 0)
+        # dict.get(key[, value]) 指定的键不存在时 返回value
+            for i in output:
+            # 另外这里也可以直接调用函数remove_one :3333
+                if self.coins[i] == 1:
+                    self.coins.pop(i)
+                else: 
+                    self.coins[i] -= 1
+
+            if coin in self.coins:
+                self.coins[coin] += 1
+            else:
+                self.coins[coin] = 1
+        else:
+            output = [coin]
+
+        return output
+
+    #def change(self, coin):
+    #   """Return change for coin, removing the result from self.coins."""
+    #    self.coins[coin] = 1 + self.coins.get(coin, 0)  # Put the coin in the machine
+    #    result = make_change(coin, self.coins)
+    #    for c in result:
+    #        self.coins = remove_one(self.coins, c)
+    #    return result
