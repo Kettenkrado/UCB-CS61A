@@ -124,7 +124,8 @@ class SleepyBear(Bear):
     >>> SleepyBear().print()
     ʕ -ᴥ-ʔ
     """
-    "*** YOUR CODE HERE ***"
+    def next_eye(self):
+        return Eye(True)
 
 class WinkingBear(Bear):
     """A bear whose left eye is different from its right eye.
@@ -133,7 +134,9 @@ class WinkingBear(Bear):
     ʕ -ᴥ•ʔ
     """
     def __init__(self):
-        "*** YOUR CODE HERE ***"
+        super().__init__()
+        self.eye_calls = 0
 
     def next_eye(self):
-        "*** YOUR CODE HERE ***"
+        self.eye_calls += 1
+        return Eye(self.eye_calls % 2)
