@@ -19,8 +19,6 @@ class Link:
             string += str(self.first) + ' '
             self = self.rest
         return string + str(self.first) + '>'
-        
-s = Link(1, Link(3, Link(5)))  
 
 def add1(s, v): # valid, but not mutative
     """Add v to an ordered list s with no repeats, returning modified s."""
