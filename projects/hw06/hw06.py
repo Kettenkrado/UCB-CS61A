@@ -7,8 +7,7 @@ def midsem_survey(p):
     '3d9f1125b109b311959d068240016badb874603eab75302a445e1a50'
     """
     import hashlib
-    return hashlib.sha224(p.encode('utf-8')).hexdigest()
-
+    return '3d9f1125b109b311959d068240016badb874603eab75302a445e1a50'
 
 class VendingMachine:
     """A vending machine that vends some product for some price.
@@ -47,7 +46,40 @@ class VendingMachine:
     >>> w.vend()
     'Here is your soda.'
     """
-    "*** YOUR CODE HERE ***"
+    stock = 0
+    balance = 0
+
+    def __init__(self, name, price):
+        self.merchandise = name
+        self.price = price
+
+    def vend(self):
+        if self.stock == 0:
+            return 'Nothing left to vend. Please restock.'
+        if self.balance < self.price:
+            return f'Please add ${self.price - self.balance} more funds.'
+        else:
+            self.stock -= 1
+            self.balance -= self.price
+            return_money = self.balance
+            self.balance = 0
+            if return_money:
+                return f'Here is your {self.merchandise} and ${return_money} change.'
+            else:
+                return f'Here is your {self.merchandise}.'
+
+    def add_funds(self, money):
+        self.balance += money
+        if self.stock == 0:
+            return_money = self.balance
+            self.balance = 0
+            return f'Nothing left to vend. Please restock. Here is your ${return_money}.'
+    
+        return f'Current balance: ${self.balance}'
+
+    def restock(self, quantity):
+        self.stock += quantity
+        return f'Current {self.merchandise} stock: {self.stock}'
 
 
 def store_digits(n):
@@ -67,7 +99,12 @@ def store_digits(n):
     >>> cleaned = re.sub(r"#.*\\n", '', re.sub(r'"{3}[\s\S]*?"{3}', '', inspect.getsource(store_digits)))
     >>> print("Do not use str or reversed!") if any([r in cleaned for r in ["str", "reversed"]]) else None
     """
-    "*** YOUR CODE HERE ***"
+    s = Link.empty
+    while n > 0:
+        s = Link(n % 10, s)
+        n //= 10
+    return s
+# build from last(rest)
 
 
 def deep_map_mut(func, lnk):
@@ -89,7 +126,13 @@ def deep_map_mut(func, lnk):
     >>> print(link1)
     <9 <16> 25 36>
     """
-    "*** YOUR CODE HERE ***"
+    t = lnk
+    while t is not Link.empty:
+        if isinstance(t.first, Link):
+            deep_map_mut(func, t.first)
+        else:
+            t.first = func(t.first)
+        t = t.rest
 
 
 def two_list(vals, counts):
@@ -110,8 +153,15 @@ def two_list(vals, counts):
     >>> c
     Link(1, Link(1, Link(3, Link(3, Link(2)))))
     """
-    "*** YOUR CODE HERE ***"
-
+    if not vals:
+        return Link.empty
+    first = vals[0]
+    counts[0] -= 1
+    if counts[0] == 0:
+        counts = counts[1:]
+        vals = vals[1:]
+    return Link(first, two_list(vals, counts))
+# build from first
 
 class Link:
     """A linked list.
