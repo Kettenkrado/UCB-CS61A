@@ -205,6 +205,9 @@ def make_let_frame(bindings, env):
         raise SchemeError('bad bindings list in let form')
     names = vals = nil
     # BEGIN PROBLEM 14
+    # sidenote: Hint: When building new linked lists iteratively, it may be easier to build it from right to left.
+    # it doesn't mean you should fetch the elements out from right to left;
+    # in fact, the order doesn't matter here and in many cases.
     while bindings is not nil:
         names = Pair(bindings.first.first, names)
         validate_form(bindings.first.rest, 1, 1)
