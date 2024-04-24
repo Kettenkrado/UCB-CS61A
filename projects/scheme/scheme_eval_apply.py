@@ -33,7 +33,9 @@ def scheme_eval(expr, env, _=None): # Optional third argument is ignored
         return scheme_forms.SPECIAL_FORMS[first](rest, env)
     else:
         # BEGIN PROBLEM 3
-        "*** YOUR CODE HERE ***"
+        operator = scheme_eval(expr.first, env)
+        operands = expr.rest.map(lambda x: scheme_eval(x, env))
+        return scheme_apply(operator, operands, env)
         # END PROBLEM 3
 
 def scheme_apply(procedure, args, env):
@@ -44,11 +46,21 @@ def scheme_apply(procedure, args, env):
        assert False, "Not a Frame: {}".format(env)
     if isinstance(procedure, BuiltinProcedure):
         # BEGIN PROBLEM 2
-        "*** YOUR CODE HERE ***"
+        py_args = []
+        while args is not nil:
+            # A sidenote by the author:
+            # here we should view the args as a list of self-evaluating values.
+            # because in Q3 we are asked to use The map method of Pair returns a new Scheme list
+            # constructed by applying a one-argument function to every item in a Scheme list.
+            # or we could get an error: "xxx is not callable: xxx"
+            py_args.append(args.first)
+            args = args.rest
+        if procedure.need_env:
+            py_args.append(env)
         # END PROBLEM 2
         try:
             # BEGIN PROBLEM 2
-            "*** YOUR CODE HERE ***"
+            return procedure.py_func(*py_args)
             # END PROBLEM 2
         except TypeError as err:
             raise SchemeError('incorrect number of arguments: {0}'.format(procedure))
@@ -79,7 +91,13 @@ def eval_all(expressions, env):
     2
     """
     # BEGIN PROBLEM 6
-    return scheme_eval(expressions.first, env) # replace this with lines of your own code
+    last_expression = expressions
+    if last_expression is nil:
+        return
+    while last_expression.rest is not nil:
+        scheme_eval(last_expression.first, env)
+        last_expression = last_expression.rest
+    return scheme_eval(last_expression.first, env)
     # END PROBLEM 6
 
 

@@ -36,7 +36,14 @@ def do_define_form(expressions, env):
         # assigning a name to a value e.g. (define x (+ 1 2))
         validate_form(expressions, 2, 2) # Checks that expressions is a list of length exactly 2
         # BEGIN PROBLEM 4
-        "*** YOUR CODE HERE ***"
+        symbol = signature
+        value = scheme_eval(expressions.rest.first, env)
+        # sidenote: the signature has the form of Pair(A, Pair(B, nil)), 
+        # where: A is the symbol being bound, B is an expression whose value should be evaluated and bound to A
+        # what we should evaluate is B, not Pair(B, nil)
+        # ...this is a little strange...
+        env.define(symbol, value)
+        return symbol
         # END PROBLEM 4
     elif isinstance(signature, Pair) and scheme_symbolp(signature.first):
         # defining a named procedure e.g. (define (f x y) (+ x y))
@@ -56,7 +63,8 @@ def do_quote_form(expressions, env):
     """
     validate_form(expressions, 1, 1)
     # BEGIN PROBLEM 5
-    "*** YOUR CODE HERE ***"
+    # same as problem 4, the structure: Pair(A, nil), where: A is the quoted expression
+    return expressions.first
     # END PROBLEM 5
 
 def do_begin_form(expressions, env):
@@ -82,7 +90,8 @@ def do_lambda_form(expressions, env):
     formals = expressions.first
     validate_formals(formals)
     # BEGIN PROBLEM 7
-    "*** YOUR CODE HERE ***"
+    body = expressions.rest
+    return LambdaProcedure(formals, body, env)
     # END PROBLEM 7
 
 def do_if_form(expressions, env):
