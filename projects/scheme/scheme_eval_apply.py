@@ -33,7 +33,7 @@ def scheme_eval(expr, env, _=None): # Optional third argument is ignored
         return scheme_forms.SPECIAL_FORMS[first](rest, env)
     else:
         # BEGIN PROBLEM 3
-        operator = scheme_eval(expr.first, env)
+        operator = scheme_eval(first, env)
         operands = expr.rest.map(lambda x: scheme_eval(x, env))
         return scheme_apply(operator, operands, env)
         # END PROBLEM 3
@@ -135,7 +135,6 @@ def optimize_tail_calls(unoptimized_scheme_eval):
 
         result = Unevaluated(expr, env)
         # BEGIN OPTIONAL PROBLEM 1
-        "*** YOUR CODE HERE ***"
         # END OPTIONAL PROBLEM 1
     return optimized_eval
 
