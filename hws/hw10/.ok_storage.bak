@@ -1,0 +1,4 @@
+'by_parent_height-correct', (0, 70)
+'size_of_dogs-correct', (512, 70)
+'sentences-correct', (1024, 70)
+'low_variance-correct', (1536, 70)
