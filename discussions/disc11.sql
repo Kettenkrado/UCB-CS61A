@@ -12,11 +12,11 @@ CREATE TABLE meals AS
   SELECT "snack"            , 22;
 
 -- Q1: Open Early
-select name from pizzas where open < 13 order by name;
+select name from pizzas where open < 13 order by name desc;
 
 -- Q2: Study Session
 create table study as select name as name, max(14 - open, 0) as duration 
-  from pizzas order by duration DESC;
+  from pizzas order by duration desc;
 
 -- Q3: Late Night Snack
 create table snack as select pizzas.name || " closes at " || pizzas.close as status
@@ -26,7 +26,7 @@ create table snack as select pizzas.name || " closes at " || pizzas.close as sta
 -- Two meals at the same place
 CREATE TABLE double AS
   SELECT a.meal AS first, b.meal AS second, name
-  FROM meals AS a, meals AS b, pizzas
-  WHERE b.time - a.time > 6
-  AND pizzas.open <= a.time
-  AND pizzas.close >= b.time;
+    FROM meals AS a, meals AS b, pizzas
+      WHERE b.time - a.time > 6
+        AND pizzas.open <= a.time
+        AND pizzas.close >= b.time;
